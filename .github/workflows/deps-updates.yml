@@ -28,6 +28,9 @@ jobs:
       - name: check dependancy update
         run: ncu --upgrade --target patch
 
+      - name: Who I m?
+        run: git config user.email "sgavhane70@gmail.com" && git config user.name "Sagar G"
+
       - name: commit changes
         run: git add package.json package-lock.json && git commit -m "automated dependancy updates"
 
