@@ -1,6 +1,8 @@
 name: Automate dependancy updates
 
-on: push
+on:
+  schedule:
+    - cron: '*/10 0 * * *'
 
 jobs:
   automate-dependancy-updates:
@@ -26,13 +28,13 @@ jobs:
         run: npm install
 
       - name: check dependancy update
-        run: ncu --upgrade --target patch
+        run: ncu -t patch -u
 
       - name: Who I m?
         run: git config user.email "sgavhane70@gmail.com" && git config user.name "Sagar G"
 
       - name: create new branch
-        run: git checkout -b task/deps-update-2 && git push origin task/deps-update-2
+        run: git checkout -b task/deps-update-${{ hashFiles('**/package-lock.json') }} && git push origin task/deps-update-${{ hashFiles('**/package-lock.json') }}
 
       - name: commit changes
         run: git add package.json package-lock.json && git commit -m "automated dependancy updates"
@@ -40,7 +42,7 @@ jobs:
       - name: create GitHub PR
         uses: repo-sync/pull-request@v2.3
         with:
-            source_branch: "task/deps-update-2"
+            source_branch: task/deps-update-${{ hashFiles('**/package-lock.json') }}
             pr_title: "Automate dependancy updates"
             pr_label: "auto-dependancy-updates"
             github_token: ${{ secrets.GITHUB_TOKEN }}
