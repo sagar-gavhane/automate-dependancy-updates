@@ -40,6 +40,7 @@ jobs:
       - name: create GitHub PR
         uses: repo-sync/pull-request@v2.3
         with:
+            source_branch: "task/deps-update-2"
             pr_title: "Automate dependancy updates"
             pr_label: "auto-dependancy-updates"
             github_token: ${{ secrets.GITHUB_TOKEN }}
