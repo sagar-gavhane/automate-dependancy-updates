@@ -26,7 +26,7 @@ jobs:
         run: npm install
 
       - name: check dependancy update
-        run: ncu --upgrade --doctor --target patch
+        run: ncu --upgrade --target patch
 
       - name: commit changes
         run: git add package.json package-lock.json && git commit -m "automated dependancy updates"
