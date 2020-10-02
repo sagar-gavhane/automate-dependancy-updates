@@ -1,0 +1,23 @@
+{
+  "name": "automate-dependancy-updates",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sagar-gavhane/automate-dependancy-updates.git"
+  },
+  "keywords": [],
+  "author": "sagar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sagar-gavhane/automate-dependancy-updates/issues"
+  },
+  "homepage": "https://github.com/sagar-gavhane/automate-dependancy-updates#readme",
+  "dependencies": {
+    "npm-check-updates": "~9.0.3"
+  }
+}

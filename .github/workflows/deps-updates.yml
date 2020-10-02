@@ -1,0 +1,39 @@
+name: Automate dependancy updates
+
+on: push
+
+jobs:
+  automate-dependancy-updates:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v2
+
+      - name: use node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: install global dependancy
+        run: npm install -g npm-check-updates
+
+      - name: install dependancy
+        run: npm install
+
+      - name: check dependancy update
+        run: ncu --upgrade --doctor --target patch
+
+      - name: commit changes
+        run: git add package.json package-lock.json && git commit -m "automated dependancy updates"
+
+      - name: create GitHub PR
+        uses: repo-sync/pull-request@v2.3
+        with:
+            pr_title: "Automate dependancy updates"
+            pr_label: "auto-dependancy-updates"
+            github_token: ${{ secrets.GITHUB_TOKEN }}
